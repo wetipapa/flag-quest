@@ -1,0 +1,184 @@
+@import "tailwindcss";
+
+/*
+ * 브랜드 원본 토큰 (`--wp-color-*`, `--wp-radius-*` 등).
+ * WETI PLAY 공식 소스: wetipapa-play/brand/tokens.css → ../brand/tokens.css로 복사해왔다.
+ * 값을 바꿀 때는 원본(wetipapa-play/brand/tokens.css)을 먼저 수정하고 이 프로젝트에도 동일하게 반영한다.
+ */
+@import "../brand/tokens.css";
+
+@theme {
+  /* ── 브랜드 공통 토큰을 Tailwind 유틸리티 이름으로 매핑 ─────────── */
+  --color-cream: var(--wp-color-bg);
+  --color-card: var(--wp-color-surface);
+  --color-card-soft: var(--wp-color-surface-soft);
+  --color-border: var(--wp-color-border);
+  --color-ink: var(--wp-color-ink);
+  --color-ink-soft: var(--wp-color-ink-soft);
+
+  --color-sun: var(--wp-color-primary-bright); /* 브랜드 프라이머리 오렌지 (공용 CTA) */
+  --color-sun-deep: var(--wp-color-primary);
+  --color-sun-tint: var(--wp-color-primary-tint);
+
+  --color-gold: #ffd166; /* 별·도장 보상색 (WETI PLAY 게임군 공통) */
+  --color-gold-deep: #c2830f;
+
+  /* ── 국기 콕콕 서비스 포인트 컬러: 월드 그린 (지구·여행 테마, 신규) ── */
+  --color-globe: #1e8a5f;
+  --color-globe-deep: #146142;
+  --color-globe-tint: #dff3e8;
+  --color-globe-ink: #0b4a33;
+
+  /* 지도/하늘 보조 액센트 */
+  --color-sky: #6fb8d6;
+  --color-sky-deep: #3e8fb0;
+
+  --font-display: "Jua", var(--wp-font-display);
+  --font-body: "Noto Sans KR", var(--wp-font-body);
+}
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  word-break: keep-all;
+  overscroll-behavior-y: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+button {
+  font-family: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--wp-color-border);
+  border-radius: 999px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes pop-in {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes confetti-burst {
+  0% {
+    transform: translate(0, 0) scale(0.3) rotate(0deg);
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(1) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20%,
+  60% {
+    transform: translateX(-6px);
+  }
+  40%,
+  80% {
+    transform: translateX(6px);
+  }
+}
+
+@keyframes plane-fly {
+  0% {
+    transform: translate(-50%, -50%) translateX(-70px) rotate(-8deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) translateX(70px) rotate(6deg);
+    opacity: 0;
+  }
+}
+
+@keyframes stamp-down {
+  0% {
+    transform: scale(2.2) rotate(-14deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(0.94) rotate(-8deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(-8deg);
+    opacity: 1;
+  }
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-40px);
+    opacity: 0;
+  }
+}
+
+.safe-top {
+  padding-top: max(env(safe-area-inset-top), 0.75rem);
+}
+.safe-bottom {
+  padding-bottom: max(env(safe-area-inset-bottom), 0.75rem);
+}
