@@ -49,11 +49,13 @@ export function HomeScreen({ onStart, onOpenPassport, onReviewMistakes }: HomeSc
   return (
     <div className="flex h-full flex-col items-center justify-center gap-4 overflow-y-auto bg-[var(--color-cream)] px-5 py-6 safe-top safe-bottom">
       <div className="flex flex-col items-center gap-2">
-        {/* 한 컷으로 무슨 게임인지 보여주는 자리. 로고가 아니라 콘텐츠다 */}
+        {/* 한 컷으로 무슨 게임인지 보여주는 자리. 로고가 아니라 콘텐츠다.
+            세로로 긴 그림이라 다른 서비스(가로 그림)와 같은 높이로 두면 작아 보인다.
+            375x553에서 아래가 잘리지 않는 선까지 키운 값이다 */}
         <img
           src={heroImage}
           alt="여권과 세계지도를 든 아이 캐릭터가 일본, 프랑스, 독일, 나이지리아 국기와 비행기에 둘러싸여 웃고 있는 그림"
-          className="h-[20vh] max-h-44 w-auto select-none"
+          className="h-[28vh] max-h-56 w-auto select-none"
           draggable={false}
         />
         <h1 className="font-[var(--font-display)] text-3xl font-black text-[var(--color-ink)]">국기 콕콕</h1>

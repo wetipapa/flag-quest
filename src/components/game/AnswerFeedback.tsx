@@ -36,21 +36,7 @@ export function AnswerFeedback({ result, country, reduceMotion, onNext }: Answer
             iPhone SE처럼 짧은 화면에서 버튼이 화면 밖으로 밀려나면 아이는 갇힌 것처럼 느낀다 */}
         <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto">
         {isCorrect ? (
-          <div className="relative flex flex-col items-center gap-1 pb-1">
-            {/* 비행기가 지나가는 길. 제목과 겹치지 않게 위에 따로 띄우고,
-                양 끝에서 완전히 사라지도록 넉넉히 잘라 둔다 */}
-            <div className="relative h-12 w-full overflow-hidden">
-              <span
-                aria-hidden="true"
-                className={`absolute left-1/2 top-1/2 text-3xl ${
-                  reduceMotion
-                    ? "-translate-x-1/2 -translate-y-1/2 opacity-0"
-                    : "animate-[plane-fly_1.2s_ease-in-out_forwards]"
-                }`}
-              >
-                ✈️
-              </span>
-            </div>
+          <div className="flex flex-col items-center gap-1 pb-1 text-center">
             <p className="text-xl font-black text-[var(--color-globe-deep)] font-[var(--font-display)]">정답이에요! 🎉</p>
             <p className="text-sm font-bold text-[var(--color-ink-soft)]">여권에 도장을 쾅 찍었어요</p>
           </div>

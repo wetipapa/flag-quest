@@ -143,33 +143,6 @@ button {
   }
 }
 
-/*
- * 정답 카드 위를 가로지르는 비행기.
- *
- * 양 끝에서 **완전히 투명해진 채로 끝난다.** 어중간한 자리에 반쯤 남아 있으면
- * 날아가다 만 것처럼 보이고, 아래 제목 뒤로 숨는 것처럼 읽힌다.
- * 가운데에서 살짝 떠올랐다 내려가 한 번에 지나가는 느낌을 준다.
- */
-@keyframes plane-fly {
-  0% {
-    transform: translate(-50%, -50%) translateX(-150px) translateY(5px) rotate(-10deg);
-    opacity: 0;
-  }
-  22% {
-    opacity: 1;
-  }
-  50% {
-    transform: translate(-50%, -50%) translateX(0) translateY(-5px) rotate(0deg);
-  }
-  78% {
-    opacity: 1;
-  }
-  100% {
-    transform: translate(-50%, -50%) translateX(150px) translateY(5px) rotate(8deg);
-    opacity: 0;
-  }
-}
-
 @keyframes stamp-down {
   0% {
     transform: scale(2.2) rotate(-14deg);
