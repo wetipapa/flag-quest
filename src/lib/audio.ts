@@ -95,10 +95,10 @@ export function playFly(): void {
   osc.stop(startAt + 0.42);
 }
 
-/** 여권 도장이 쾅 찍히는 느낌의 짧고 두툼한 소리 */
+/** 여권 도장이 쾅 찍히는 느낌의 짧고 두툼한 소리 (square 대신 triangle이라 덜 거칠다) */
 export function playStamp(): void {
-  playTone({ freq: 180, duration: 0.12, type: "square", gain: 0.14 });
-  playTone({ freq: 90, duration: 0.14, delay: 0.02, type: "square", gain: 0.1 });
+  playTone({ freq: 220, duration: 0.1, type: "triangle", gain: 0.16 });
+  playTone({ freq: 150, duration: 0.12, delay: 0.04, type: "triangle", gain: 0.11 });
 }
 
 /** 대륙 완주 등 큰 축하 사운드 */

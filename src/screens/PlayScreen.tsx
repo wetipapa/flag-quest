@@ -77,8 +77,8 @@ export function PlayScreen({ course, difficulty, onExit, onRoundComplete, forced
       if (!alreadyVisited) statsRef.current.newly.add(current.targetCode);
 
       dispatch({ type: "ANSWER_RESULT", code: current.targetCode, correct: true, now: Date.now() });
-      sound.fly();
-      window.setTimeout(sound.stamp, 300);
+      sound.correct();
+      window.setTimeout(sound.stamp, 260);
       setResultAt(index, "correct");
       setFeedbackResult("correct");
       setPhase("feedback");
@@ -151,7 +151,7 @@ export function PlayScreen({ course, difficulty, onExit, onRoundComplete, forced
         </div>
       </header>
 
-      <main className="flex-1 min-h-0 overflow-y-auto flex flex-col items-center justify-center gap-5 px-5 py-6">
+      <main className="flex-1 min-h-0 overflow-y-auto flex flex-col items-center justify-center gap-5 px-5 pt-9 pb-6">
         {config.showContinentHint && continent && (
           <span className="rounded-full bg-[var(--color-globe-tint)] text-[var(--color-globe-ink)] text-xs font-extrabold px-3 py-1">
             {continent.emoji} {continent.labelKo}

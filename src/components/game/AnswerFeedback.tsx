@@ -28,7 +28,7 @@ export function AnswerFeedback({ result, country, reduceMotion, onNext }: Answer
       {isCorrect && <Confetti active reduceMotion={reduceMotion} />}
 
       <div
-        className={`relative w-full max-w-sm max-h-[85vh] overflow-y-auto flex flex-col gap-3 rounded-[28px] bg-[var(--color-card)] p-5 border-4 ${
+        className={`relative w-full max-w-sm max-h-[85vh] overflow-y-auto flex flex-col gap-3 rounded-[28px] bg-[var(--color-card)] px-5 pb-5 pt-7 border-4 ${
           isCorrect ? "border-[var(--color-gold)]" : "border-[var(--color-sky)]"
         } shadow-2xl ${reduceMotion ? "" : "animate-[pop-in_0.35s_ease-out]"}`}
       >

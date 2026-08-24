@@ -22,8 +22,8 @@ export function CountryInfoCard({ country }: { country: Country }) {
         </div>
       </div>
 
-      <Suspense fallback={<div className="w-full h-24 rounded-2xl bg-[var(--color-border)] animate-pulse" aria-hidden="true" />}>
-        <WorldPinMap lat={country.lat} lng={country.lng} className="w-full h-24 rounded-2xl" />
+      <Suspense fallback={<div className="w-full h-24 rounded-2xl bg-[var(--color-border)] animate-pulse mt-1" aria-hidden="true" />}>
+        <WorldPinMap lat={country.lat} lng={country.lng} className="w-full h-24 rounded-2xl mt-1" />
       </Suspense>
 
       <dl className="grid grid-cols-2 gap-2 text-sm text-left">
