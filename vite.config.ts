@@ -15,7 +15,7 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["favicon.svg"],
+      includeAssets: ["favicon-32.png", "apple-touch-icon.png"],
       manifest: {
         name: "국기 콕콕",
         short_name: "국기콕콕",

@@ -4,9 +4,9 @@ import { HomeScreen } from "./screens/HomeScreen";
 import { PlayScreen } from "./screens/PlayScreen";
 import { ResultScreen } from "./screens/ResultScreen";
 import { PassportScreen } from "./screens/PassportScreen";
-import { SettingsPanel } from "./screens/SettingsPanel";
 import { buildMistakeRound } from "./lib/quizEngine";
 import { createRng } from "./lib/rng";
+import { trackComplete } from "./lib/track";
 import type { CourseId, Difficulty, QuestionSpec, RoundResult } from "./types";
 
 type Screen = "home" | "play" | "result" | "passport";
@@ -22,7 +22,6 @@ function AppShell() {
   const [screen, setScreen] = useState<Screen>("home");
   const [playConfig, setPlayConfig] = useState<PlayConfig | null>(null);
   const [lastResult, setLastResult] = useState<RoundResult | null>(null);
-  const [settingsOpen, setSettingsOpen] = useState(false);
 
   function startRound(course: CourseId, difficulty: Difficulty) {
     setPlayConfig({ course, difficulty });
@@ -40,7 +39,11 @@ function AppShell() {
   return (
     <div className="relative h-full">
       {screen === "home" && (
-        <HomeScreen onStart={startRound} onOpenPassport={() => setScreen("passport")} onOpenSettings={() => setSettingsOpen(true)} />
+        <HomeScreen
+          onStart={startRound}
+          onOpenPassport={() => setScreen("passport")}
+          onReviewMistakes={startMistakeReview}
+        />
       )}
 
       {screen === "play" && playConfig && (
@@ -50,6 +53,7 @@ function AppShell() {
           forcedQuestions={playConfig.forcedQuestions}
           onExit={() => setScreen("home")}
           onRoundComplete={(result) => {
+            trackComplete();
             setLastResult(result);
             setScreen("result");
           }}
@@ -66,15 +70,13 @@ function AppShell() {
       )}
 
       {screen === "passport" && <PassportScreen onBack={() => setScreen("home")} onReviewMistakes={startMistakeReview} />}
-
-      {settingsOpen && <SettingsPanel onClose={() => setSettingsOpen(false)} />}
     </div>
   );
 }
 
 function App() {
   return (
-    <div className="h-screen w-full flex justify-center bg-[#e7dcc3]">
+    <div className="h-viewport w-full flex justify-center bg-[#e7dcc3]">
       <div className="relative w-full max-w-md h-full bg-[var(--color-cream)] shadow-2xl overflow-hidden">
         <GameProvider>
           <AppShell />

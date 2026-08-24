@@ -137,7 +137,8 @@ export function PlayScreen({ course, difficulty, onExit, onRoundComplete, forced
 
   return (
     <div className="relative h-full flex flex-col bg-[var(--color-cream)]">
-      <header className="flex items-center gap-3 px-4 pt-4 safe-top">
+      {/* 피드백 오버레이(z-40)보다 위에 둔다. 게임 중 나가는 길은 언제나 열려 있어야 한다 */}
+      <header className="relative z-50 flex items-center gap-3 px-4 pt-4 safe-top">
         <button
           type="button"
           onClick={onExit}

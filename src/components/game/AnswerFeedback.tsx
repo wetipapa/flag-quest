@@ -28,16 +28,25 @@ export function AnswerFeedback({ result, country, reduceMotion, onNext }: Answer
       {isCorrect && <Confetti active reduceMotion={reduceMotion} />}
 
       <div
-        className={`relative w-full max-w-sm max-h-[85vh] overflow-y-auto flex flex-col gap-3 rounded-[28px] bg-[var(--color-card)] px-5 pb-5 pt-7 border-4 ${
+        className={`relative flex w-full max-w-sm max-h-[85vh] flex-col rounded-[28px] bg-[var(--color-card)] px-5 pb-5 pt-7 border-4 ${
           isCorrect ? "border-[var(--color-gold)]" : "border-[var(--color-sky)]"
         } shadow-2xl ${reduceMotion ? "" : "animate-[pop-in_0.35s_ease-out]"}`}
       >
+        {/* 넘치는 것은 이 안쪽만 스크롤한다. `다음 나라로`는 카드 바닥에 그대로 남는다 —
+            iPhone SE처럼 짧은 화면에서 버튼이 화면 밖으로 밀려나면 아이는 갇힌 것처럼 느낀다 */}
+        <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto">
         {isCorrect ? (
           <div className="relative flex flex-col items-center gap-1 pb-1">
-            <div className="relative w-full h-10 overflow-hidden">
+            {/* 비행기가 지나가는 길. 제목과 겹치지 않게 위에 따로 띄우고,
+                양 끝에서 완전히 사라지도록 넉넉히 잘라 둔다 */}
+            <div className="relative h-12 w-full overflow-hidden">
               <span
                 aria-hidden="true"
-                className={`absolute left-1/2 top-1/2 text-3xl ${reduceMotion ? "" : "animate-[plane-fly_1.1s_ease-in-out]"}`}
+                className={`absolute left-1/2 top-1/2 text-3xl ${
+                  reduceMotion
+                    ? "-translate-x-1/2 -translate-y-1/2 opacity-0"
+                    : "animate-[plane-fly_1.2s_ease-in-out_forwards]"
+                }`}
               >
                 ✈️
               </span>
@@ -52,9 +61,10 @@ export function AnswerFeedback({ result, country, reduceMotion, onNext }: Answer
           </div>
         )}
 
-        <CountryInfoCard country={country} />
+          <CountryInfoCard country={country} />
+        </div>
 
-        <Button variant={isCorrect ? "primary" : "secondary"} size="md" className="w-full mt-1" onClick={onNext}>
+        <Button variant={isCorrect ? "primary" : "secondary"} size="md" className="mt-3 w-full shrink-0" onClick={onNext}>
           다음 나라로 →
         </Button>
       </div>

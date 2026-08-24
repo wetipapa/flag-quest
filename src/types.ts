@@ -34,6 +34,12 @@ export interface Country {
   populationYear: number;
   /** 아이가 흥미를 느낄 만한 한 줄 특징 */
   funFactKo: string;
+  /**
+   * 명목 GDP 세계 순위의 어림값 (2024년 기준).
+   * 해마다 바뀌고 기관마다 순서가 조금씩 달라 상위 40개국만 채웠다.
+   * 값이 없으면 국가 정보 카드에 그 줄을 아예 띄우지 않는다.
+   */
+  gdpRank?: number;
   tier: Tier;
   /** 국기가 비슷해 헷갈리기 쉬운 다른 나라 코드 (어려운 난이도의 오답 보기로 활용) */
   confusables?: string[];

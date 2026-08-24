@@ -35,10 +35,17 @@ export function CountryInfoCard({ country }: { country: Country }) {
           <dt className="font-bold text-[var(--color-ink-soft)] text-xs">인구 ({country.populationYear}년 기준)</dt>
           <dd className="font-extrabold text-[var(--color-ink)]">{country.populationKo}</dd>
         </div>
-        <div className="col-span-2 rounded-xl bg-[var(--color-card-soft)] px-3 py-2">
+        <div className={`${country.gdpRank ? "" : "col-span-2 "}rounded-xl bg-[var(--color-card-soft)] px-3 py-2`}>
           <dt className="font-bold text-[var(--color-ink-soft)] text-xs">쓰는 말</dt>
           <dd className="font-extrabold text-[var(--color-ink)]">{country.languageKo}</dd>
         </div>
+        {/* 상위 40개국만 값이 있다. 없는 나라에는 이 칸이 뜨지 않는다 */}
+        {country.gdpRank && (
+          <div className="rounded-xl bg-[var(--color-card-soft)] px-3 py-2">
+            <dt className="font-bold text-[var(--color-ink-soft)] text-xs">경제 규모</dt>
+            <dd className="font-extrabold text-[var(--color-ink)]">세계 {country.gdpRank}위</dd>
+          </div>
+        )}
       </dl>
 
       <p className="rounded-xl bg-[var(--color-globe-tint)] text-[var(--color-globe-ink)] px-3 py-2.5 text-sm font-bold leading-snug text-left">

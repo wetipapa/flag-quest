@@ -2,7 +2,7 @@
 
 7세 전후 어린이를 위한 세계 국기 학습 게임입니다. 국기를 보고 나라 이름을 콕 맞히면 여권에 도장이 찍히고, 대륙을 옮겨 다니며 나라를 수집하는 짧은 세계여행을 반복해서 즐길 수 있습니다.
 
-WETI PLAY(웨티플레이) 산하 서비스로, `wetipapa-play`의 브랜드 디자인 토큰(`brand/tokens.css`)과 톤앤매너를 그대로 이어받았습니다.
+WTPP PLAY 산하 서비스로, `wetipapa-play`의 브랜드 디자인 토큰(`brand/tokens.css`)과 톤앤매너를 그대로 이어받았습니다.
 
 ## 실행 방법
 
@@ -69,9 +69,17 @@ npm run gen:world-map  # scripts/continents-source.svg로부터 대륙 지도 �
 
 ## 브랜드 적용
 
+브랜드 문서는 이 저장소에 두지 않는다. 두 층이고, **충돌하면 상위가 이긴다.**
+
+| 층 | 문서 | 무엇을 정하나 |
+|---|---|---|
+| 상위 | `brand-assets/BRAND_GUIDE.md` | 브랜드 위계, 캐릭터 캐논, CI, 브랜드 컬러 |
+| 하위 | `wetipapa-play/BRAND_GUIDE.md` | CSS 토큰, 서체, 로고 컴포넌트, 대비·접근성 |
+
+
 - `brand/tokens.css`는 `wetipapa-play/brand/tokens.css` 원본을 그대로 복사한 것이며, `src/index.css`에서 import해 배경·잉크·프라이머리 오렌지·서체(Jua/Noto Sans KR)·라운드·그림자 토큰을 그대로 재사용한다.
 - 기존 서비스(웨티 보카=블루, 웨티 레이싱=레드오렌지, 웨티 시계탐험대=바이올렛)와 겹치지 않는 새 포인트 컬러로 "월드 그린"(`--color-globe`)을 추가해 이 게임만의 정체성을 표현했다.
-- 브랜드 가이드 원칙에 따라 마스코트 캐릭터는 게임 화면 전면에 내세우지 않았고, Footer에는 `WETI PLAY by 웨티아빠` 표기를 유지한다.
+- 브랜드 가이드 원칙에 따라 마스코트 캐릭터는 게임 화면 전면에 내세우지 않았고, Footer에는 WTPP 공통 규칙대로 허브(`WTPP PLAY`)와 웨티파파 블로그 링크 두 줄만 둔다 (`by 웨티파파` 표기는 쓰지 않는다).
 - 서체는 Next.js가 아니라 Vite 프로젝트이므로 `next/font/google` 대신 `@fontsource/jua`, `@fontsource/noto-sans-kr`로 동일하게 자체 호스팅해 외부 네트워크 요청 없이 안정적으로 로딩한다.
 
 ## 기술 스택 & 구조

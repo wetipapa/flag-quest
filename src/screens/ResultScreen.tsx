@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useGame } from "../state/GameContext";
 import { useSound } from "../hooks/useSound";
 import { Button } from "../components/ui/Button";
+import { trackReplay } from "../lib/track";
 import { Card } from "../components/ui/Card";
 import { FlagImage } from "../components/FlagImage";
 import { Footer } from "../components/Footer";
@@ -79,7 +80,15 @@ export function ResultScreen({ result, onPlayAgain, onOpenPassport, onHome }: Re
         </Card>
 
         <div className="w-full max-w-sm flex flex-col gap-2.5 mt-1">
-          <Button variant="primary" size="lg" className="w-full" onClick={onPlayAgain}>
+          <Button
+            variant="primary"
+            size="lg"
+            className="w-full"
+            onClick={() => {
+              trackReplay();
+              onPlayAgain();
+            }}
+          >
             더 여행하기 ✈️
           </Button>
           <Button variant="soft" size="md" className="w-full" onClick={onOpenPassport}>

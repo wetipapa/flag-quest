@@ -2,43 +2,42 @@ const HUB_URL = "https://play.wetipapa.com";
 const BLOG_URL = "https://blog.naver.com/wetipapa";
 
 /**
- * 브랜드 가이드 §7 규칙: Footer에는 항상 'WETI PLAY by 웨티아빠' 표기를 남긴다.
- * 여기에 더해 WETI PLAY 허브(다른 게임)와 웨티아빠 블로그로 가는 연결 링크를 둔다 —
- * 이 게임이 단독으로 따로 노는 게 아니라 WETI PLAY 가족의 일부라는 걸 보여준다.
+ * 첫 화면 맨 아래와 결과·완료 화면에 두는 두 줄짜리 링크.
+ *
+ * 다섯 서비스가 **같은 문구와 같은 자리**를 쓴다 (WTPP 공통 규칙).
+ * 서비스마다 다르게 쓰면 같은 곳으로 가는 링크로 안 읽힌다.
+ * 구현 기준은 theo-math-pop의 `HubLink` / `BlogLink`.
+ *
+ * 게임 중에는 넣지 않는다 — 눈에 띄면 한 판을 끝내기 전에 빠져나간다.
+ * 아이가 보는 화면에서 링크는 허브와 블로그 둘이 끝이다.
  */
 export function Footer() {
   return (
-    <footer className="px-4 py-4 text-center safe-bottom">
-      <nav className="flex flex-col items-center gap-1.5 mb-3" aria-label="다른 콘텐츠">
+    <footer className="px-4 pt-2 pb-4 text-center safe-bottom">
+      <p className="text-center text-xs font-bold text-[var(--color-ink-soft)]">
         <a
           href={HUB_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-xs font-bold text-[var(--color-globe)] underline underline-offset-2"
+          className="underline decoration-2 underline-offset-4 hover:text-[var(--color-ink)]"
         >
-          WETI PLAY에서 다른 게임도 만나보세요
+          WTPP PLAY
         </a>
-        <a
-          href={BLOG_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-xs font-bold text-[var(--color-ink-soft)] underline underline-offset-2"
-        >
-          ✍️ 웨티파파 블로그에서 아들 웨티와 함께하는 소소한 일상을 만나요
-        </a>
-      </nav>
+        에서 다른 게임도 만나보세요
+      </p>
 
-      <p className="text-xs font-bold text-[var(--color-ink-soft)]">
-        <span className="inline-flex items-center gap-1">
-          <span
-            aria-hidden="true"
-            className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-[var(--color-sun)] text-white text-[9px]"
+      {/* 한 줄로 두면 좁은 폰에서 어중간한 자리에 접힌다. 의미 단위로 끊어 두 줄로 고정한다 */}
+      <p className="mt-1.5 text-center text-xs font-bold leading-relaxed text-[var(--color-ink-soft)]">
+        <span className="block">
+          <a
+            href={BLOG_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline decoration-2 underline-offset-4 hover:text-[var(--color-ink)]"
           >
-            ✦
-          </span>
-          WETI PLAY
-        </span>{" "}
-        by 웨티아빠
+            ✍️ 웨티파파 블로그
+          </a>
+          에서
+        </span>
+        <span className="block">아들 웨티와 함께하는 소소한 일상을 만나요</span>
       </p>
     </footer>
   );
