@@ -1,7 +1,11 @@
+import { lazy, Suspense } from "react";
 import type { Country } from "../types";
 import { CONTINENTS } from "../types";
 import { FlagImage } from "./FlagImage";
-import { WorldPinMap } from "./WorldPinMap";
+
+// 대륙 지도 데이터(worldMapPaths.ts)가 100KB가 넘어, 첫 화면 로딩에 끼지 않도록
+// 실제로 국가 정보 카드가 뜨는 시점에만 따로 내려받는다(코드 스플리팅).
+const WorldPinMap = lazy(() => import("./WorldPinMap").then((m) => ({ default: m.WorldPinMap })));
 
 export function CountryInfoCard({ country }: { country: Country }) {
   const continent = CONTINENTS.find((c) => c.id === country.continent);
@@ -18,7 +22,9 @@ export function CountryInfoCard({ country }: { country: Country }) {
         </div>
       </div>
 
-      <WorldPinMap lat={country.lat} lng={country.lng} className="w-full h-24 rounded-2xl" />
+      <Suspense fallback={<div className="w-full h-24 rounded-2xl bg-[var(--color-border)] animate-pulse" aria-hidden="true" />}>
+        <WorldPinMap lat={country.lat} lng={country.lng} className="w-full h-24 rounded-2xl" />
+      </Suspense>
 
       <dl className="grid grid-cols-2 gap-2 text-sm text-left">
         <div className="rounded-xl bg-[var(--color-card-soft)] px-3 py-2">

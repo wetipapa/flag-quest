@@ -20,8 +20,21 @@ npm run build      # 프로덕션 빌드 (tsc + vite build)
 npm run preview    # 빌드 결과 로컬 미리보기
 npm run test       # vitest 단위 테스트 실행
 npm run lint       # oxlint 정적 분석
-npm run gen:icons  # scripts/icon-source.svg로부터 favicon/PWA 아이콘 재생성
+npm run gen:icons      # scripts/icon-source.svg로부터 favicon/PWA 아이콘 재생성
+npm run gen:world-map  # scripts/continents-source.svg로부터 대륙 지도 경로 데이터 재생성
 ```
+
+### Open Graph 공유 이미지
+
+카카오톡/Threads/트위터 등에 링크를 공유했을 때 뜨는 미리보기 이미지(`public/og-image.png`, 1200×630)는
+`scripts/og-template.html`을 실제 앱과 동일한 폰트(Jua/Noto Sans KR)로 브라우저에 띄운 뒤 스크린샷해서
+만들었습니다. 문구나 디자인을 바꾸려면:
+
+1. `scripts/og-template.html` 수정
+2. 브라우저 자동화 도구(Playwright 등)로 `scripts/og-template.html`을 1200×630(고해상도용으로는
+   `deviceScaleFactor: 2`) 뷰포트로 열어 스크린샷 → `public/og-image.png`로 저장
+   (`node_modules`의 폰트 파일을 `file://` 상대 경로로 참조하므로 템플릿 파일은 `scripts/` 안에 그대로 둘 것)
+3. `index.html`의 `og:title` / `og:description`도 문구를 바꿨다면 함께 갱신
 
 ## 핵심 플레이
 

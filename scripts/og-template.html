@@ -1,0 +1,162 @@
+<!--
+  Open Graph 공유 이미지 소스 템플릿 (1200×630).
+  실제 앱과 똑같은 폰트(Jua/Noto Sans KR)로 렌더링되도록, 브라우저로 이 파일을 열어
+  1200×630 뷰포트로 스크린샷한 뒤 public/og-image.png로 저장한다.
+  (재생성 예시: Playwright `page.setViewportSize({width:1200,height:630})` → `page.screenshot()`)
+  node_modules의 폰트 파일을 file:// 경로로 직접 참조하므로, 이 파일은 반드시
+  flag-quest/scripts/ 안에 그대로 두고 열어야 한다 (경로가 상대적으로 고정되어 있음).
+-->
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../node_modules/@fontsource/jua/400.css" />
+    <link rel="stylesheet" href="../node_modules/@fontsource/noto-sans-kr/400.css" />
+    <link rel="stylesheet" href="../node_modules/@fontsource/noto-sans-kr/700.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        font-family: "Noto Sans KR", sans-serif;
+      }
+      .stage {
+        position: relative;
+        width: 1200px;
+        height: 630px;
+        background: radial-gradient(120% 140% at 8% 0%, #fff2df 0%, #fff7ea 45%, #fff7ea 100%);
+      }
+      /* 장식 원 (브랜드 OG 이미지와 동일한 느낌의 은은한 배경 도형) */
+      .circle-bg-1 {
+        position: absolute;
+        left: -120px;
+        bottom: -160px;
+        width: 340px;
+        height: 340px;
+        border-radius: 50%;
+        background: #eeeae2;
+      }
+      .circle-bg-2 {
+        position: absolute;
+        right: -90px;
+        top: -110px;
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background: #dff3e8;
+        opacity: 0.7;
+      }
+
+      .sparkle {
+        position: absolute;
+        left: 68px;
+        top: 56px;
+        width: 34px;
+        height: 34px;
+      }
+
+      .content {
+        position: absolute;
+        left: 68px;
+        top: 128px;
+        width: 620px;
+      }
+      .title {
+        font-family: "Jua", sans-serif;
+        font-size: 92px;
+        line-height: 1.08;
+        color: #33241c;
+      }
+      .subtitle {
+        margin-top: 6px;
+        font-family: "Jua", sans-serif;
+        font-size: 34px;
+        color: #1e8a5f;
+        letter-spacing: 0.5px;
+      }
+      .description {
+        margin-top: 26px;
+        font-size: 26px;
+        font-weight: 700;
+        line-height: 1.5;
+        color: #6b5b52;
+      }
+
+      .wordmark {
+        position: absolute;
+        left: 68px;
+        bottom: 56px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 18px;
+        border-radius: 999px;
+        background: #ffffff;
+        box-shadow: 0 3px 0 #f0dfc7;
+      }
+      .wordmark .badge {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #f0900c;
+        color: #fff;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .wordmark .text {
+        font-size: 20px;
+        font-weight: 700;
+        color: #33241c;
+      }
+
+      .hero {
+        position: absolute;
+        right: 40px;
+        bottom: 0;
+        height: 640px;
+        width: auto;
+      }
+
+      .domain {
+        position: absolute;
+        left: 68px;
+        bottom: 20px;
+        font-size: 18px;
+        font-weight: 700;
+        color: #a99c8f;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stage">
+      <div class="circle-bg-1"></div>
+      <div class="circle-bg-2"></div>
+
+      <svg class="sparkle" viewBox="0 0 24 24" fill="#f0900c">
+        <path d="M12 1c0.6 4.6 2.4 7.4 6 8.4c-3.6 1-5.4 3.8-6 8.4c-0.6-4.6-2.4-7.4-6-8.4c3.6-1 5.4-3.8 6-8.4Z" />
+      </svg>
+
+      <div class="content">
+        <div class="title">국기 콕콕</div>
+        <div class="subtitle">FLAG QUEST · WETI PLAY</div>
+        <div class="description">국기를 콕! 맞히며 여권에 도장을 모으는<br />195개국 세계여행 학습 게임</div>
+      </div>
+
+      <div class="wordmark">
+        <span class="badge">✦</span>
+        <span class="text">WETI PLAY by 웨티아빠</span>
+      </div>
+
+      <img class="hero" src="../src/assets/hero-boy-globe.png" alt="" />
+      <div class="domain">flag.wetipapa.com</div>
+    </div>
+  </body>
+</html>
