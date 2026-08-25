@@ -80,7 +80,7 @@ export function CountryInfoCard({ country }: { country: Country }) {
             <FlagImage
               code={country.code}
               label={`${country.nameKo} 국기`}
-              className="w-full aspect-[4/3] rounded-2xl border-4 border-[var(--color-gold)] shadow-2xl"
+              className="w-full aspect-[4/3] rounded-2xl border-4 border-[var(--color-gold)] shadow-2xl shrink-0"
             />
             <button
               type="button"

@@ -21,15 +21,19 @@ export function ReviewQuestionCard({ target, result, onReturn }: ReviewQuestionC
         {result === "correct" ? "✅ 맞혔던 나라" : "🌱 함께 배웠던 나라"} · 다시 보기
       </span>
 
+      {/* shrink-0: 이 카드는 CountryInfoCard까지 합치면 한 화면보다 길어질 때가 많다.
+          부모가 overflow-y-auto라 넘치면 스크롤되면 되는데, flex-shrink 기본값(1) 때문에
+          aspect-ratio 박스인 국기가 남는 세로 공간에 맞춰 짜부라져 길쭉한 알약처럼 보이던 버그가 있었다.
+          shrink-0을 줘야 국기가 항상 원래 비율(4:3)대로 그려진다. */}
       <FlagImage
         code={target.code}
         decorative
-        className="w-full max-w-[220px] aspect-[4/3] rounded-3xl border-4 border-white shadow-[0_10px_24px_rgba(51,36,28,0.18)]"
+        className="w-full max-w-[220px] aspect-[4/3] rounded-3xl border-4 border-white shadow-[0_10px_24px_rgba(51,36,28,0.18)] shrink-0"
       />
 
       <CountryInfoCard country={target} />
 
-      <Button variant="primary" size="md" className="w-full max-w-sm mt-1" onClick={onReturn}>
+      <Button variant="primary" size="md" className="w-full max-w-sm mt-1 shrink-0" onClick={onReturn}>
         이어서 하기 →
       </Button>
     </div>

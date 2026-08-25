@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useGame } from "../state/GameContext";
 import { useSound } from "../hooks/useSound";
 import { useSwipeNav } from "../hooks/useSwipeNav";
@@ -55,11 +55,7 @@ export function PlayScreen({ course, difficulty, onExit, onRoundComplete, forced
 
   const isReviewing = viewIndex !== index;
   const viewedTarget = isReviewing ? getCountry(questions[viewIndex].targetCode) : target;
-
-  // 문제가 넘어가면(다음 나라로) 보고 있는 위치도 자동으로 실시간 문제를 따라간다
-  useEffect(() => {
-    setViewIndex(index);
-  }, [index]);
+  console.log("[DEBUG]", { index, viewIndex, isReviewing, phase });
 
   const swipeHandlers = useSwipeNav({
     onBack: () => setViewIndex((v) => Math.max(0, v - 1)),
@@ -151,7 +147,12 @@ export function PlayScreen({ course, difficulty, onExit, onRoundComplete, forced
       });
       return;
     }
+    // index와 viewIndex를 같은 배치 안에서 같이 올린다. 예전엔 viewIndex를
+    // useEffect로 뒤늦게 따라가게 했는데, 그 한 틱 사이(index만 앞서고 viewIndex는
+    // 아직 이전 값인 순간) isReviewing이 잘못 true가 돼 다시보기 카드가
+    // 한 프레임 잘못 떴다 사라지는 깜빡임이 있었다 — 스와이프를 안 해도 매번 발생했다.
     setIndex((i) => i + 1);
+    setViewIndex((i) => i + 1);
   }
 
   return (
@@ -183,10 +184,12 @@ export function PlayScreen({ course, difficulty, onExit, onRoundComplete, forced
 
           <p className="text-lg font-extrabold text-[var(--color-ink)] text-center">이 국기는 어느 나라일까요?</p>
 
+          {/* shrink-0: 짧은 화면에서 옵션 4개까지 겹치면 flex-shrink 기본값 때문에
+              aspect-ratio 박스인 국기가 찌그러질 수 있다. ReviewQuestionCard에서 실제로 겪은 문제라 여기도 미리 막는다 */}
           <FlagImage
             code={target.code}
             decorative
-            className="w-full max-w-[280px] aspect-[4/3] rounded-3xl border-4 border-white shadow-[0_10px_24px_rgba(51,36,28,0.18)]"
+            className="w-full max-w-[280px] aspect-[4/3] rounded-3xl border-4 border-white shadow-[0_10px_24px_rgba(51,36,28,0.18)] shrink-0"
           />
 
           <div className="w-full max-w-sm flex flex-col gap-2.5" role="group" aria-label="보기">
