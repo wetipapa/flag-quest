@@ -51,6 +51,13 @@ export function CountryInfoCard({ country }: { country: Country }) {
       <p className="rounded-xl bg-[var(--color-globe-tint)] text-[var(--color-globe-ink)] px-3 py-2.5 text-sm font-bold leading-snug text-left">
         💡 {country.funFactKo}
       </p>
+
+      {/* 국기 색·문양의 뜻. 공식 유래가 뚜렷한 나라만 값이 있어 없으면 이 줄이 아예 안 뜬다 */}
+      {country.flagMeaningKo && (
+        <p className="rounded-xl bg-[var(--color-card-soft)] px-3 py-2.5 text-sm font-bold leading-snug text-left text-[var(--color-ink)]">
+          🎨 {country.flagMeaningKo}
+        </p>
+      )}
     </div>
   );
 }
