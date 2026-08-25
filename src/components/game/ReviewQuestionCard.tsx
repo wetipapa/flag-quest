@@ -31,7 +31,9 @@ export function ReviewQuestionCard({ target, result, onReturn }: ReviewQuestionC
         className="w-full max-w-[220px] aspect-[4/3] rounded-3xl border-4 border-white shadow-[0_10px_24px_rgba(51,36,28,0.18)] shrink-0"
       />
 
-      <CountryInfoCard country={target} />
+      {/* showFlag=false: 바로 위에 이미 이 카드 전용의 큰 국기를 그렸다.
+          CountryInfoCard가 원래 갖고 있는 작은 국기 썸네일까지 같이 뜨면 국기가 두 번 겹쳐 보인다. */}
+      <CountryInfoCard country={target} showFlag={false} />
 
       <Button variant="primary" size="md" className="w-full max-w-sm mt-1 shrink-0" onClick={onReturn}>
         이어서 하기 →

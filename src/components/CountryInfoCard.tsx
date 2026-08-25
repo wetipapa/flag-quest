@@ -8,7 +8,17 @@ import { playTap } from "../lib/audio";
 // 실제로 국가 정보 카드가 뜨는 시점에만 따로 내려받는다(코드 스플리팅).
 const WorldPinMap = lazy(() => import("./WorldPinMap").then((m) => ({ default: m.WorldPinMap })));
 
-export function CountryInfoCard({ country }: { country: Country }) {
+interface CountryInfoCardProps {
+  country: Country;
+  /**
+   * 이 카드 자체의 작은 국기 썸네일을 보여줄지. 기본은 true.
+   * 호출하는 쪽에서 이미 큰 국기를 따로 그리고 있으면(예: ReviewQuestionCard)
+   * false로 꺼서 국기가 두 번 겹쳐 보이지 않게 한다 — 나라 이름·대륙은 그대로 남는다.
+   */
+  showFlag?: boolean;
+}
+
+export function CountryInfoCard({ country, showFlag = true }: CountryInfoCardProps) {
   const continent = CONTINENTS.find((c) => c.id === country.continent);
   // 작은 국기 썸네일을 누르면 이 상태를 켜서 아래 확대 모달을 띄운다
   const [flagZoomed, setFlagZoomed] = useState(false);
@@ -16,17 +26,19 @@ export function CountryInfoCard({ country }: { country: Country }) {
   return (
     <div className="w-full flex flex-col gap-3">
       <div className="flex flex-col items-center gap-1.5 text-center">
-        <button
-          type="button"
-          onClick={() => {
-            playTap();
-            setFlagZoomed(true);
-          }}
-          aria-label={`${country.nameKo} 국기 크게 보기`}
-          className="active:scale-95 transition-transform"
-        >
-          <FlagImage code={country.code} label={`${country.nameKo} 국기`} className="w-16 h-11 rounded-lg border border-[var(--color-border)]" />
-        </button>
+        {showFlag && (
+          <button
+            type="button"
+            onClick={() => {
+              playTap();
+              setFlagZoomed(true);
+            }}
+            aria-label={`${country.nameKo} 국기 크게 보기`}
+            className="active:scale-95 transition-transform"
+          >
+            <FlagImage code={country.code} label={`${country.nameKo} 국기`} className="w-16 h-11 rounded-lg border border-[var(--color-border)]" />
+          </button>
+        )}
         <div>
           <p className="text-lg font-black text-[var(--color-ink)]">{country.nameKo}</p>
           <p className="text-xs font-bold text-[var(--color-ink-soft)]">
@@ -74,7 +86,7 @@ export function CountryInfoCard({ country }: { country: Country }) {
 
       {/* 국기 확대 모달. `fixed`를 써서 이 카드가 스크롤되는 부모(정답 카드 등) 안에
           있어도 화면 전체를 덮는다 — `absolute`였으면 스크롤 영역 안에 갇혀 잘렸을 것이다 */}
-      {flagZoomed && (
+      {showFlag && flagZoomed && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-[var(--color-ink)]/60 backdrop-blur-sm p-6" role="dialog" aria-modal="true">
           <div className="relative w-full max-w-xs animate-[pop-in_0.25s_ease-out]">
             <FlagImage
