@@ -12,8 +12,11 @@ export function ProgressDots({ total, current, results }: ProgressDotsProps) {
         const result = results[i];
         const isCurrent = i === current;
         const base = "h-2.5 rounded-full transition-all duration-300";
-        if (result === "correct") return <span key={i} className={`${base} w-2.5 bg-[var(--color-globe)]`} />;
-        if (result === "wrong") return <span key={i} className={`${base} w-2.5 bg-[var(--color-sun-deep)]`} />;
+        // 지금 보고 있는 점은(왼쪽 스와이프로 지나온 문제를 다시 보는 중이어도) 항상 길게 —
+        // 이미 채점된 문제라 색은 그대로 두되, 폭으로 "지금 여기"를 알려준다
+        const width = isCurrent ? "w-6" : "w-2.5";
+        if (result === "correct") return <span key={i} className={`${base} ${width} bg-[var(--color-globe)]`} />;
+        if (result === "wrong") return <span key={i} className={`${base} ${width} bg-[var(--color-sun-deep)]`} />;
         if (isCurrent) return <span key={i} className={`${base} w-6 bg-[var(--color-sun)]`} />;
         return <span key={i} className={`${base} w-2.5 bg-[var(--color-border)]`} />;
       })}
